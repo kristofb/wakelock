@@ -34,8 +34,8 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v2.3.3
-      - uses: subosito/flutter-action@v1.4.0
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
         with:
           channel: ${{ matrix.channel }}
       - run: flutter pub get
@@ -48,13 +48,14 @@ jobs:
 
   test:
     timeout-minutes: 16
-    runs-on: macos-latest
+    # Using macOS 13 Ventura due to https://github.com/flutter/flutter/issues/118469
+    runs-on: macos-13
     name: ${{ matrix.package }} testing on ${{ matrix.channel }} with ${{ matrix.device }}
     strategy:
       matrix:
         device:
-          - 'iPhone 12 Pro Simulator (15.2)'
-          - 'iPhone 13 Pro Max Simulator (15.2)'
+          - 'iPhone 14 Pro Simulator (16.2)'
+          - 'iPhone 14 Pro Max Simulator (16.2)'
         channel:
           - 'stable'
           - 'beta'
@@ -81,8 +82,8 @@ jobs:
             awk -F ',' -v 'device=${{ matrix.device }}' '$1 == device { print $2 }'
           )
           xcrun simctl boot "${UDID:?simulator not found}"
-      - uses: actions/checkout@v2.3.3
-      - uses: subosito/flutter-action@v1.4.0
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
         with:
           channel: ${{ matrix.channel }}
       - run: flutter pub get
