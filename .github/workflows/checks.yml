@@ -48,7 +48,8 @@ jobs:
 
   test:
     timeout-minutes: 16
-    runs-on: macos-latest
+    # Using macOS 13 Ventura due to https://github.com/flutter/flutter/issues/118469
+    runs-on: macos-13
     name: ${{ matrix.package }} testing on ${{ matrix.channel }} with ${{ matrix.device }}
     strategy:
       matrix:
