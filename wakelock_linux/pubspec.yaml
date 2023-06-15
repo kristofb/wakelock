@@ -14,7 +14,7 @@ dependencies:
   flutter:
     sdk: flutter
   meta: ^1.8.0
-  package_info_plus: ^3.0.2
+  package_info_plus: ^4.0.2
   wakelock_platform_interface: ^0.3.0
 
 dev_dependencies:
